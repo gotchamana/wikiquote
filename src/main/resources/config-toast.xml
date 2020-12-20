@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration>
+
+    <!-- Enables or disables the entire toast notification -->
+    <Feature Name="Toast" Enabled="True" /> 
+
+    <!-- Specifies if the toast is used for OS upgrades. If set to True, the targetOS build is taking into account -->
+    <Feature Name="UpgradeOS" Enabled="False" />
+
+    <!-- Enables the toast for reminding users of restarting their device if it exceeds the uptime defined in MaxUptimeDays -->
+    <Feature Name="PendingRebootUptime" Enabled="False" />
+
+    <!-- Enables the toast for reminding users of pending reboots found in registry/WMI. Might not suit ConfigMgr all too well, as if a pending reboot is found, further deployments won't run -->
+    <Feature Name="PendingRebootCheck" Enabled="False" />	
+
+    <!-- Enables the toast for reminding users of expiring Active Directory passwords -->
+    <Feature Name="ADPasswordExpiration" Enabled="False" />	
+
+    <!-- The actual build number of the targeted OS. 19041 = 2004 | 18363 = 1909 | 18362 = 1903 | 17763 = 1809. This option has no effect if OSUpgrade is set to False -->
+    <Option Name="TargetOS" Build="19041" />	
+
+    <!-- When using the toast for checking for pending reboots. A reboot is considered pending if computer uptime exceeds the value set here -->
+    <Option Name="MaxUptimeDays" Value="-6" />	
+
+    <!-- Adds an additional group to the toast with text about the uptime of the computer -->
+    <Option Name="PendingRebootUptimeText" Enabled="False" />	
+
+    <!-- Adds an additional group to the toast with text -->
+    <Option Name="PendingRebootCheckText" Enabled="False" />	
+
+    <!-- Adds an additional group to the toast with text -->
+    <Option Name="ADPasswordExpirationText" Enabled="False" />	
+
+    <!-- How many days in advance shall the toast start reminding the users  -->
+    <Option Name="ADPasswordExpirationDays" Value="90" />	
+
+    <!-- Will enable the toast to run any ConfigMgr PackageID through a custom protocol -->
+    <Option Name="RunPackageID" Enabled="False" Value="KR100907" /> 
+
+    <!-- Will enable the toast to run any ConfigMgr ApplicationID through a custom protocol -->
+    <Option Name="RunApplicationID" Enabled="False" Value="ScopeId_A9117680-D054-482B-BC97-532E6CBD0E6B/Application_fd55f35c-4e34-4490-a3ec-ee0b79233ec6" />
+
+    <!-- Will enable the toast to run any ConfigMgr Update ID through a custom protocol. Configure the value to the relevant KB-article ID -->
+    <Option Name="RunUpdateID" Enabled="False" Value="4561600" /> 
+
+    <!-- Will enable the toast to run any ConfigMgr Update Name through a custom protocol -->
+    <Option Name="RunUpdateTitle" Enabled="False" Value="" /> 
+
+    <!-- Adds an additional group to the toast with text about the deadline of the OSUpgrade -->
+    <Option Name="Deadline" Enabled="False" Value="30-09-2019 08:00" />	
+
+    <!-- Adds an additional group to the toast with text about the deadline of the OSUpgrade. This will retrieve the deadline of the IPU from WMI -->
+    <Option Name="DynamicDeadline" Enabled="False" Value="KR1008C8" />	
+
+    <!-- Automatically create the needed custom scripts and protocols. This removes the need to do scripts and protocols outside of the script -->
+    <Option Name="CreateScriptsAndProtocols" Enabled="True" /> 
+
+    <!-- The app in Windows doing the actual notification - can't be both SoftwareCenter and Powershell -->
+    <Option Name="UseSoftwareCenterApp" Enabled="False" />	
+
+    <!-- The app in Windows doing the actual notification - can't be both SoftwareCenter and Powershell -->
+    <Option Name="UsePowershellApp" Enabled="True" />	
+
+    <!-- Enable or disable a custom speak scenario, where the text will be read out aloud -->
+    <Option Name="CustomAudio" Enabled="False" />	
+
+    <!-- Load images path-->
+    <Option Name="ImagesPath" Value="file://C:/Users/jinhu/Downloads" />  
+
+    <!-- File name of the image shown as logo in the toast notoification  -->
+    <Option Name="LogoImageName" Value="wikiquote.png" />  
+
+    <!-- File name of the image shown in the top of the toast notification -->	
+    <Option Name="HeroImageName" Value="" /> 
+
+    <!-- Enables or disables the action button. -->
+    <Option Name="ActionButton1" Enabled="False" />	
+
+    <!-- Enables or disables the action button. -->
+    <Option Name="ActionButton2" Enabled="False" />	
+
+    <!-- Enables or disables the dismiss button. -->
+    <Option Name="DismissButton" Enabled="False" />	
+
+    <!-- Enabling this option will always enable action button and dismiss button -->
+    <Option Name="SnoozeButton" Enabled="False" /> 
+
+    <!-- Possible values are: reminder | short | long -->
+    <Option Name="Scenario" Type="long" />	
+
+    <!-- Action taken when using the Action button. Can be any protocol in Windows -->
+    <Option Name="Action1" Value="" />	
+
+    <!-- Action taken when using the Action button. Can be any protocol in Windows -->
+    <Option Name="Action2" Value="" />	
+
+    <!-- Displays the toast with a personal greeting using the users given name retrieved from AD. Will try retrieval from WMI of no local AD -->
+    <Text Option="GreetGivenName" Enabled="False" />	
+
+    <!-- Enable support for multiple languages. If set to True, the toast notification will look for the users language culture within the config file -->
+    <Text Option="MultiLanguageSupport" Enabled="False" /> 
+
+    <!-- Default fallback language. This language will be used if MultiLanguageSupport is set to False or if no matching language is found -->
+    <en-US> 
+        <!-- Text used if the PendingRebootUptimeText Option is enabled -->
+        <Text Name="PendingRebootUptimeText">PendingRebootUptimeText</Text> 
+
+        <!-- Text used if the PendingRebootUptimeText Option is enabled -->
+        <Text Name="PendingRebootCheckText">PendingRebootCheckText</Text> 
+
+        <!-- Text used if the ADPasswordExpirationText Option is enabled -->
+        <Text Name="ADPasswordExpirationText">ADPasswordExpirationText</Text> 
+
+        <!-- Text to speech used if the CustomAudioTextToSpeech Option is enabled -->
+        <Text Name="CustomAudioTextToSpeech">CustomAudioTextToSpeech</Text> 
+
+        <!-- Text on the ActionButton if enabled -->
+        <Text Name="ActionButton1">ActionButton1</Text>  
+
+        <!-- Text on the ActionButton if enabled -->
+        <Text Name="ActionButton2">ActionButton2</Text>  
+
+        <!-- Text on the DismissButton if enabled -->
+        <Text Name="DismissButton">DismissButton</Text> 
+
+        <!-- Text on the SnoozeButton if enabled -->
+        <Text Name="SnoozeButton">SnoozeButton</Text> 
+
+        <Text Name="AttributionText"></Text>
+        <Text Name="HeaderText"></Text>
+        <Text Name="TitleText"></Text>
+        <Text Name="BodyText1"></Text>
+        <Text Name="BodyText2"></Text>
+        <Text Name="SnoozeText">SnoozeText</Text>
+        <Text Name="DeadlineText">DeadlineText</Text>
+        <Text Name="GreetMorningText">GreetMorningText</Text>
+        <Text Name="GreetAfternoonText">GreetAfternoonText</Text>
+        <Text Name="GreetEveningText">GreetEveningText</Text>
+        <Text Name="MinutesText">MinutesText</Text>
+        <Text Name="HourText">HourText</Text>
+        <Text Name="HoursText">HoursText</Text>
+        <Text Name="ComputerUptimeText">ComputerUptimeText</Text>
+        <Text Name="ComputerUptimeDaysText">ComputerUptimeDaysText</Text>
+    </en-US>
+</Configuration>
