@@ -122,6 +122,7 @@ public class Windows10NotificationService implements NotificationService {
             );
             var process = new ProcessBuilder(command).inheritIO().start();
             process.onExit().get();
+            Thread.sleep(3000);
         } catch (IOException | ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
