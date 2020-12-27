@@ -126,6 +126,7 @@
                     <imageName>${project.artifactId}</imageName>
                     <mainClass>${exec.mainClass}</mainClass>
                     <buildArgs>
+                        <buildArg>--initialize-at-build-time=com.sun.org.apache.xml.internal.serializer.ToXMLStream</buildArg>
                         <buildArg>--no-fallback</buildArg>
                         <buildArg>--enable-https</buildArg>
                     </buildArgs>
