@@ -17,7 +17,7 @@ Quote of the day from wikiquote
 ## Build/Run as uber jar
 
 Build: `./mvnw package`  
-Run: `java -jar target/wikiquote-X.X.jar`
+Run: `java -jar target/wikiquote-X.X.X.jar`
 
 ## Build/Run as native image
 
