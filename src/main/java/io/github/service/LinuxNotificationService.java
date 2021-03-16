@@ -15,7 +15,7 @@ public class LinuxNotificationService implements NotificationService {
 
     private void checkZenityInstallation() {
         try {
-            var command = List.of("command", "-v", "zenity");
+            var command = List.of("sh", "-c", "command -v zenity");
             var process = new ProcessBuilder(command).start();
             var exitValue = process.onExit().get().exitValue();
             if (exitValue != 0)

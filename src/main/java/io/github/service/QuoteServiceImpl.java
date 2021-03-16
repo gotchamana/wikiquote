@@ -26,6 +26,7 @@ public class QuoteServiceImpl implements QuoteService {
             var quote = getQuote();
             notificationService.sendNotification("維基語錄", quote, icon);
         } catch (IOException | InterruptedException e) {
+            Thread.currentThread().interrupt();
             e.printStackTrace();
         }
     }
