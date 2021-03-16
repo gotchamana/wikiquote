@@ -62,12 +62,12 @@ public class QuoteServiceImpl implements QuoteService {
         if (!matcher.find()) return quote;
 
         var quoteWithAnchor = matcher.group(1);
-        regex = "(.*?)<a.*?>(.*?)</a>";
+        regex = "(.*?)<a.*?>(.*?)</a>(.*?)";
         pattern = Pattern.compile(regex, Pattern.DOTALL);
         matcher = pattern.matcher(quoteWithAnchor);
 
         if (matcher.find())
-            quote = matcher.group(1) + matcher.group(2);
+            quote = matcher.group(1) + matcher.group(2) + matcher.group(3);
 
         return quote;
     }
