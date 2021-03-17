@@ -8,7 +8,7 @@ Quote of the day from wikiquote
 - GraalVM 20.3.0
 - Notification program
   - Linux: zenity
-  - Windows: PowerShell script with Windows 10 toast
+  - Windows: [SnoreToast](https://github.com/KDE/snoretoast) 32 bit
 
 ## Compile/Run
 
