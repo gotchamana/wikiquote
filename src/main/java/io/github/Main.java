@@ -12,57 +12,43 @@ public class Main {
 
     private static final String TEMP_DIR_PREFIX = "wikiquote";
     private static final String WIKIQUOTE_LOGO_FILE_NAME = "wikiquote.png";
-    private static final String NOTIFICATION_CONFIG_FILE_NAME = "config-toast.xml";
-    private static final String NOTIFICATION_SCRIPT_FILE_NAME = "notification.ps1";
+    private static final String SNORE_TOAST_FILE_NAME = "snoretoast-x86.exe";
 
     public static void main(String[] args) throws Exception {
         var resourcesDir = Files.createTempDirectory(TEMP_DIR_PREFIX);
+        resourcesDir.toFile().deleteOnExit();
         copyResourcesToTempDir(resourcesDir);
+
         showQuoteOfTheDay(resourcesDir);
-        cleanTempDir(resourcesDir);
     }
 
     private static void copyResourcesToTempDir(Path tempDir) {
-        Stream.of(WIKIQUOTE_LOGO_FILE_NAME, NOTIFICATION_CONFIG_FILE_NAME, NOTIFICATION_SCRIPT_FILE_NAME)
+        Stream.of(WIKIQUOTE_LOGO_FILE_NAME, SNORE_TOAST_FILE_NAME)
             .forEach(fileName -> {
                 try (var in = Main.class.getClassLoader().getResourceAsStream(fileName)) {
-                    Files.copy(in, tempDir.resolve(fileName));
+                    var resource = tempDir.resolve(fileName);
+                    resource.toFile().deleteOnExit();
+                    Files.copy(in, resource);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             });
     }
 
-    private static NotificationService getNotificationService(Path config, Path script) {
-        if (SystemUtils.IS_OS_LINUX)
-            return new LinuxNotificationService();
-        else if (SystemUtils.IS_OS_WINDOWS_10)
-            return new Windows10NotificationService(config, script);
-
-        var msg = String.format("Unsupported OS name: %s, version: %s", SystemUtils.OS_NAME, SystemUtils.OS_VERSION);
-        throw new UnsupportedOperationException(msg);
-    }
-
     private static void showQuoteOfTheDay(Path resourcesDir) {
         var icon = resourcesDir.resolve(WIKIQUOTE_LOGO_FILE_NAME);
-        var config = resourcesDir.resolve(NOTIFICATION_CONFIG_FILE_NAME);
-        var script = resourcesDir.resolve(NOTIFICATION_SCRIPT_FILE_NAME);
-        var notificationService = getNotificationService(config, script);
+        var snoreToast = resourcesDir.resolve(SNORE_TOAST_FILE_NAME);
+        var notificationService = getNotificationService(snoreToast);
         new QuoteServiceImpl(icon, notificationService).showQuoteOfTheDay();
     }
 
-    private static void cleanTempDir(Path tempDir) throws IOException {
-        try (var stream = Files.list(tempDir)) {
-            stream.forEach(Main::deleteFile);
-            deleteFile(tempDir);
-        }
-    }
+    private static NotificationService getNotificationService(Path snoreToast) {
+        if (SystemUtils.IS_OS_LINUX)
+            return new LinuxNotificationService();
+        else if (SystemUtils.IS_OS_WINDOWS_10)
+            return new Windows10NotificationService(snoreToast);
 
-    private static void deleteFile(Path file) {
-        try {
-            Files.deleteIfExists(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        var msg = String.format("Unsupported OS name: %s, version: %s", SystemUtils.OS_NAME, SystemUtils.OS_VERSION);
+        throw new UnsupportedOperationException(msg);
     }
 }
