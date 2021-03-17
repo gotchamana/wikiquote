@@ -2,7 +2,7 @@
     "resources": {
         "includes": [
             {
-                "pattern": ".*\\.xml|.*\\.png|.*\\.ps1"
+                "pattern": ".*\\.exe|.*\\.png"
             }
         ]
     }
