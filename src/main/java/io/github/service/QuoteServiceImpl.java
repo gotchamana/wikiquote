@@ -67,7 +67,7 @@ public class QuoteServiceImpl implements QuoteService {
         pattern = Pattern.compile(regex, Pattern.DOTALL);
         matcher = pattern.matcher(quoteWithAnchor);
 
-        if (matcher.find())
+        if (matcher.matches())
             quote = matcher.group(1) + matcher.group(2) + matcher.group(3);
 
         return quote;
